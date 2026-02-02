@@ -1,5 +1,6 @@
 use core::fmt;
 
+#[derive(Debug, PartialEq)]
 pub enum ItemParsingError {
     TooFewFields(usize),
     TooManyFields(usize)

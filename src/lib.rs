@@ -37,4 +37,11 @@ mod tests {
 
         assert_eq!(sample_item.url, None)
     }
+
+    #[test]
+    fn item_creation_throws_error_when_not_field() {
+        let sample_item = Item::from_str("Nintendo Switch\t1\high");
+
+        assert_eq!(sample_item.err().unwrap(), ItemParsingError::TooFewFields(3))
+    }
 }
