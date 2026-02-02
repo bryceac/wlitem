@@ -1,5 +1,3 @@
-use std::fmt::format;
-
 use uuid::Uuid;
 
 use crate::Priority;
@@ -8,7 +6,7 @@ use url::Url;
 
 /// structure that represents an item in a wishlist
 
-#[derive(PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq)]
 pub struct Item {
     pub id: String,
     pub name: String,
