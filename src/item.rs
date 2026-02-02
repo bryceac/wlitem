@@ -1,6 +1,6 @@
 use uuid::Uuid;
 
-use crate::Priority;
+use crate::{Priority, ItemParsingError};
 
 use url::Url;
 
@@ -83,12 +83,26 @@ impl Item {
         content
     }
 
-    pub fn from_str(string: &str) -> Self {
-        let item_string: Vec<&str> = string.split('\t').collect();
+    pub fn from_str(string: &str) -> Result<Self, ItemParsingError> {
+        let item_content: Vec<&str> = string.split('\t').collect();
 
-        let mut item_builder = Item::builder();
+        let fields_found = item_content.len();
 
-        item_builder.build()
+        match fields_found {
+            n if n < 5 => Err(ItemParsingError::TooFewFields(n)),
+            n if n > 5 => Err(ItemParsingError::TooManyFields(n)),
+            _ => {
+                let mut item_builder = Item::builder();
+                
+                item_builder.set_id(item_content[0])
+                .set_name(item_content[1])
+                .set_quantity(item_content[2].parse::<u32>().unwrap_or(1))
+                .set_priority(item_content[3])
+                .set_url(item_content[4]);
+
+                Ok(item_builder.build())
+            }
+        }
     }
 }
 

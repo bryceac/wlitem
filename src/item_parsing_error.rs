@@ -1,8 +1,8 @@
 use core::fmt;
 
 pub enum ItemParsingError {
-    TooFewFields(u32),
-    TooManyFields(u32)
+    TooFewFields(usize),
+    TooManyFields(usize)
 }
 
 impl ItemParsingError {
