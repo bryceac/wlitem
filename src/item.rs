@@ -39,6 +39,30 @@ impl Item {
         Item::builder().build()
     }
 
+    /**
+     * method to quickly create an item. 
+     * This method does the same thing as using the builder
+     * manually, so it is more of a convenience method.
+     */
+    pub fn from(id: &str, name: &str, quantity: u32, priority: &str, url: &str, notes: Vec<String>) -> Self {
+        let mut item_builder = Item::builder();
+
+        if !id.is_empty() {
+            item_builder.set_id(id);
+        }
+
+        item_builder.set_name(name)
+        .set_quantity(quantity)
+        .set_priority(priority)
+        .set_url(url);
+
+        for note in notes.clone() {
+            item_builder.add_note(&note);
+        }
+
+        item_builder.build()
+    }
+
     pub fn to_string(&self) -> String {
         let mut content = format!("{}\t{}\t{}\t{}\t{}\r\n\r\n", 
         self.id, 
