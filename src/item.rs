@@ -4,6 +4,8 @@ use uuid::Uuid;
 
 use crate::Priority;
 
+use url::Url;
+
 /// structure that represents an item in a wishlist
 
 #[derive(PartialEq, Eq)]
@@ -12,7 +14,7 @@ pub struct Item {
     pub name: String,
     pub quantity: u32,
     pub priority: Priority,
-    pub url: String,
+    pub url: Option<Url>,
     pub notes: Vec<String>
 }
 
@@ -45,7 +47,11 @@ impl Item {
         self.name, 
         self.quantity, 
         self.priority.to_str(), 
-        self.url);
+        if let Some(ref url) = self.url {
+            url.as_str()
+        } else {
+            ""
+        });
 
         content.push_str("-----\r\n");
 
@@ -64,7 +70,7 @@ pub struct ItemBuilder {
     pub name: Option<String>,
     pub quantity: Option<u32>,
     pub priority: Option<Priority>,
-    pub url: Option<String>,
+    pub url: Option<Url>,
     pub notes: Vec<String>
 }
 
@@ -105,7 +111,12 @@ impl ItemBuilder {
     }
 
     pub fn set_url(&mut self, url: &str) -> &mut Self {
-        self.url = Some(url.to_owned());
+        self.url = if let Ok(url) = Url::parse(url) {
+            Some(url)
+        } else {
+            None
+        };
+
         self
     }
 
@@ -137,11 +148,7 @@ impl ItemBuilder {
             } else {
                 Priority::Medium
             },
-            url : if let Some(ref url) = self.url {
-                url.to_owned()
-            } else {
-                String::default()
-            },
+            url : self.url.clone(),
             notes: self.notes.clone()
         }
     }
