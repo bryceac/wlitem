@@ -39,9 +39,16 @@ mod tests {
     }
 
     #[test]
-    fn item_creation_throws_error_when_not_field() {
+    fn item_creation_throws_error_when_not_enough_fields() {
         let sample_item = Item::from_str("Nintendo Switch\t1\thigh");
 
         assert_eq!(sample_item.err().unwrap(), ItemParsingError::TooFewFields(3))
+    }
+
+    #[test]
+    fn item_creation_throws_error_when_too_many_fields() {
+        let sample_item = Item::from_str("10\tNintendo Switch\t1\thigh\thttps://example.com\thello");
+
+        assert_eq!(sample_item.err().unwrap(), ItemParsingError::TooManyFields(6))
     }
 }
