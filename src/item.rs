@@ -45,13 +45,9 @@ impl Item {
      * manually, so it is more of a convenience method.
      */
     pub fn from(id: &str, name: &str, quantity: u32, priority: &str, url: &str, notes: Vec<String>) -> Self {
-        let mut item_builder = Item::builder();
-
-        if !id.is_empty() {
-            item_builder.set_id(id);
-        }
-
-        item_builder.set_name(name)
+        let mut item_builder = Item::builder()
+        .set_id(id)
+        .set_name(name)
         .set_quantity(quantity)
         .set_priority(priority)
         .set_url(url);
@@ -85,6 +81,16 @@ impl Item {
 
         content
     }
+
+    pub fn from_str(string: &str) -> Self {
+        let item_string: Vec<&str> = string.split('\t').collect();
+
+        let mut item_builder = Item::builder();
+
+
+
+        item_builder.build()
+    }
 }
 
 pub struct ItemBuilder {
@@ -113,7 +119,9 @@ impl ItemBuilder {
      * If this is unused, a default value will be provided.
      */
     pub fn set_id(&mut self, id: &str) -> &mut Self {
-        self.id = id.to_owned();
+        if !id.is_empty() {
+            self.id = id.to_owned();
+        }
         self
     }
 
