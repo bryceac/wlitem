@@ -83,6 +83,13 @@ impl Item {
         content
     }
 
+    /**
+     * this method is used to create an item from a given string, 
+     * which is expected to be formatted like a TSV.
+     * 
+     * However, because of the complexity involved with the standard output,
+     * notes are not supported with this function.
+     */
     pub fn from_str(string: &str) -> Result<Self, ItemParsingError> {
         let item_content: Vec<&str> = string.split('\t').collect();
 
