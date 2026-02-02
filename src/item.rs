@@ -2,7 +2,7 @@ use std::fmt::format;
 
 use uuid::Uuid;
 
-use crate::priority::Priority;
+use crate::Priority;
 
 /// structure that represents an item in a wishlist
 
@@ -40,12 +40,22 @@ impl Item {
     }
 
     pub fn to_string(&self) -> String {
-        format!("{}\t{}\t{}\t{}\t{}\r\n\r\n{}", 
+        let mut content = format!("{}\t{}\t{}\t{}\t{}\r\n\r\n", 
         self.id, 
         self.name, 
         self.quantity, 
-        self.priority.to_string(), 
-        self.url)
+        self.priority.to_str(), 
+        self.url);
+
+        content.push_str("-----\r\n");
+
+        for note in self.notes.clone() {
+            let formatted_note = format!("{}\r\n\r\n", note);
+
+            content.push_str(&formatted_note);
+        }
+
+        content
     }
 }
 
@@ -122,8 +132,8 @@ impl ItemBuilder {
             } else {
                 1
             },
-            priority: if let Some(priority) = self.priority {
-                priority
+            priority: if let Some(ref priority) = self.priority {
+                priority.clone()
             } else {
                 Priority::Medium
             },

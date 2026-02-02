@@ -1,3 +1,4 @@
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd)]
 pub enum Priority {
     Low,
     Medium,
@@ -7,17 +8,17 @@ pub enum Priority {
 impl Priority {
     pub fn from_str(value: &str) -> Option<Self> {
         match value {
-            s if s.to_lowercase() == "low" => Priority::Low,
-            s if s.to_lowercase() == "medium" => Priority::Medium,
-            s if s.to_lowercase() == "high" => Priority::High,
+            s if s.to_lowercase() == "low" => Some(Priority::Low),
+            s if s.to_lowercase() == "medium" => Some(Priority::Medium),
+            s if s.to_lowercase() == "high" => Some(Priority::High),
             _ => None
         }
     }
 
-    pub fn to_string(&self) -> String {
+    pub fn to_str(&self) -> &str {
         match self {
             Priority::Low => "low",
-            priority::Medium => "medium",
+            Priority::Medium => "medium",
             Priority::High => "high"
         }
     }
