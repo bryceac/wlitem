@@ -108,6 +108,10 @@ impl ItemBuilder {
         self
     }
 
+    /**
+     * sets the URL. If the URL is not valid for any reason, it will
+     * set the value to none.
+     */
     pub fn set_url(&mut self, url: &str) -> &mut Self {
         self.url = if let Ok(url) = Url::parse(url) {
             Some(url)
