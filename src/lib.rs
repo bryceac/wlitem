@@ -59,10 +59,11 @@ mod tests {
         assert!(sample_item.is_ok())
     }
 
+    #[test]
     fn item_parses_from_text_correctly() {
         let sample_item = Item::from_str("10\tNintendo Switch\t1\thigh\thttps://example.com");
         let expected_item = Item::from("10", "Nintendo Switch", 1, "high", "https://example.com", vec![]);
 
-        assert_eq!(sample_item, expected_item);
+        assert_eq!(sample_item.ok().unwrap(), expected_item);
     }
 }
