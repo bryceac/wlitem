@@ -17,4 +17,11 @@ mod tests {
 
         assert_eq!(invalid_data, None)
     }
+
+    #[test]
+    fn enum_parses_correctly() {
+        let enum_value = Priority::from_str("low").unwrap();
+
+        assert_eq!(enum_value, Priority::Low)
+    }
 }
