@@ -6,7 +6,7 @@ use url::Url;
 
 /// structure that represents an item in a wishlist
 
-#[derive(Clone, PartialEq, Eq)]
+#[derive(Clone, PartialEq, Eq, PartialOrd)]
 pub struct Item {
     pub id: String,
     pub name: String,
