@@ -45,8 +45,9 @@ impl Item {
      * manually, so it is more of a convenience method.
      */
     pub fn from(id: &str, name: &str, quantity: u32, priority: &str, url: &str, notes: Vec<String>) -> Self {
-        let mut item_builder = Item::builder()
-        .set_id(id)
+        let mut item_builder = Item::builder();
+        
+        item_builder.set_id(id)
         .set_name(name)
         .set_quantity(quantity)
         .set_priority(priority)
