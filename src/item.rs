@@ -117,7 +117,8 @@ impl ItemBuilder {
 
     /**
      * set the identifier of an item.
-     * If this is unused, a default value will be provided.
+     * If this is unused or given value is empty, 
+     * a default value will be provided.
      */
     pub fn set_id(&mut self, id: &str) -> &mut Self {
         if !id.is_empty() {
