@@ -88,8 +88,6 @@ impl Item {
 
         let mut item_builder = Item::builder();
 
-
-
         item_builder.build()
     }
 }
