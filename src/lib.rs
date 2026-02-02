@@ -51,4 +51,11 @@ mod tests {
 
         assert_eq!(sample_item.err().unwrap(), ItemParsingError::TooManyFields(6))
     }
+
+    #[test]
+    fn create_item_via_text() {
+        let sample_item = Item::from_str("10\tNintendo Switch\t1\thigh\thttps://example.com");
+
+        assert!(sample_item.is_ok())
+    }
 }
