@@ -27,6 +27,7 @@ pub struct Item {
     pub url: Option<Url>,
 
     #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[serde(default = "Vec::new")]
     pub notes: Vec<String>
 }
 
