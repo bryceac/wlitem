@@ -60,6 +60,10 @@ impl Item {
         item_builder.build()
     }
 
+    /**
+     * turn item into string. If there are any notes,
+     * they will be displayed underneath import details.
+     */
     pub fn to_string(&self) -> String {
         let mut content = format!("{}\t{}\t{}\t{}\t{}\r\n\r\n", 
         self.id, 
