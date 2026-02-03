@@ -104,8 +104,8 @@ mod tests {
             ])
         ];
 
-        let decoded_items = Item::from_file("test.json");
+        let decoded_items = Item::from_file("wishlist.json");
 
-        assert_eq!(decoded_items.unwrap(), expected_items)
+        assert_eq!(decoded_items.ok().unwrap(), expected_items)
     }
 }
