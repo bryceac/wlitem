@@ -72,12 +72,14 @@ impl Item {
             ""
         });
 
-        content.push_str("-----\r\n");
+        if !self.notes.is_empty() {
+            content.push_str("-----\r\n");
 
-        for note in self.notes.clone() {
-            let formatted_note = format!("{}\r\n\r\n", note);
+            for note in self.notes.clone() {
+                let formatted_note = format!("{}\r\n\r\n", note);
 
-            content.push_str(&formatted_note);
+                content.push_str(&formatted_note);
+            }
         }
 
         content
