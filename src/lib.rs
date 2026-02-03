@@ -108,4 +108,19 @@ mod tests {
 
         assert_eq!(decoded_items.unwrap(), expected_items)
     }
+
+    #[test]
+    fn save_items_to_tsv() {
+        let sample_items = vec![
+            Item::from("7746C39C-D951-4E03-840C-8E91AF0B6D1D", "Nintendo Switch 2", 1, "high", "https://example.com/nintendo_switch_2", vec![]),
+            Item::from("BBDF7A43-C38B-4943-93A0-BDD6B47A2685", "Mario Kart World", 1, "high", "https://example.com/nintendo_switch_2", vec![
+                "Only if I get the Switch 2".to_owned()
+            ]),
+            Item::from("6AA6A21C-F22D-40A5-AE1A-D7E2B4F87724", "Dragon Quest 7", 1, "", "https://example.com/nintendo_switch_2", vec![
+                "Only if I get the Switch 2".to_owned()
+            ])
+        ];
+
+        assert!(sample_items.save_tsv("wishlist.tsv").is_ok())
+    }
 }
