@@ -1,5 +1,5 @@
 use serde::{ Serialize, Deserialize };
-#[derive(Clone, Debug, Deserialize, Serialize,PartialEq, Eq, PartialOrd)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
 pub enum Priority {
     Low,
     Medium,
@@ -22,5 +22,17 @@ impl Priority {
             Priority::Medium => "medium",
             Priority::High => "high"
         }
+    }
+
+    pub fn is_low(&self) -> bool {
+        self.clone() == Priority::Low
+    }
+
+    pub fn is_medium(&self) -> bool {
+        self.clone() == Priority::Medium
+    }
+
+    pub fn is_high(&self) -> bool {
+        self.clone() == Priority::High
     }
 }
