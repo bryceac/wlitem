@@ -147,6 +147,19 @@ impl Item {
             Err(error) => Err(format!("{}", error))
         }
     }
+
+    pub fn from_tsv_file(f: &str) -> Result<Vec<Item>, String> {
+        match file_contents_from(f) {
+            Ok(content) => {
+                let lines: Vec<&str> = content.lines().map(|l| l).collect();
+
+                let items: Vec<Item> = lines.iter().map(|line| Item::from_str(line)).collect();
+
+                Ok(items)
+            },
+            Err(error) => Err(format!("{}", error))
+        }
+    }
 }
 
 pub struct ItemBuilder {
