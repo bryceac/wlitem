@@ -104,7 +104,7 @@ mod tests {
             ])
         ];
 
-        let decoded_items = Item::from_file_file("test.json");
+        let decoded_items = Item::from_file("test.json");
 
         assert_eq!(decoded_items.ok().unwrap(), expected_items)
     }

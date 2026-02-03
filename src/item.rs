@@ -132,7 +132,7 @@ impl Item {
         }
     }
 
-    pub fn from_file_file(f: &str) -> Result<Vec<Item>, String> {
+    pub fn from_file(f: &str) -> Result<Vec<Item>, String> {
         match file_contents_from(f) {
             Ok(content) => match serde_json::from_str::<Vec<Item>>(&content) {
                 Ok(decoded_items) => Ok(decoded_items),
