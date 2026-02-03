@@ -15,7 +15,7 @@ pub struct Item {
     pub id: String,
     pub name: String,
 
-    #[serde(default = 1)]
+    #[serde(default = "default_quantity")]
     pub quantity: u32,
     #[serde(default = "default_priority")]
     pub priority: Priority,
@@ -228,4 +228,8 @@ fn generate_id() -> String {
 
 fn default_priority() -> Priority {
     Priority::Medium
+}
+
+fn default_quantity() -> u32 {
+    1
 }
