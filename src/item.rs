@@ -133,6 +133,11 @@ impl Item {
         }
     }
 
+    /**
+     * this method will load items from a json file.
+     * If it is successful, a vector with the contents will be returned.
+     * If it fails, it will give out an error.
+     */
     pub fn from_file(f: &str) -> Result<Vec<Item>, String> {
         match file_contents_from(f) {
             Ok(content) => match serde_json::from_str::<Vec<Item>>(&content) {
