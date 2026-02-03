@@ -34,7 +34,7 @@ As of the writing of this README, each of those has been implemented.
 
 <dl>
   <dt style="font-weight:bold">0.1</dt>
-  <dd>Initial release</dd>
+  <dd>Initial release. Released Feb. 3, 2026</dd>
 </dl>
 
 ### Usage
