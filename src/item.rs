@@ -17,9 +17,14 @@ pub struct Item {
 
     #[serde(default = "default_quantity")]
     pub quantity: u32,
+    #[serde(skip_serializing_if = "Priority::is_medium")]
     #[serde(default = "default_priority")]
     pub priority: Priority,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub url: Option<Url>,
+
+    #[serde(skip_serializing_if = "Vec::is_empty")]
     pub notes: Vec<String>
 }
 
