@@ -153,7 +153,7 @@ impl Item {
             Ok(content) => {
                 let lines: Vec<&str> = content.lines().map(|l| l).collect();
 
-                let items: Vec<Item> = lines.iter().map(|line| Item::from_str(line)).collect();
+                let items: Vec<Item> = lines.iter().filter_map(|line| Item::from_str(line).ok()).collect();
 
                 Ok(items)
             },
