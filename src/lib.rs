@@ -103,5 +103,9 @@ mod tests {
                 "Only if I get the Switch 2".to_owned()
             ])
         ];
+
+        let decoded_items = Item::from_file_file("test.json");
+
+        assert_eq!(decoded_items.ok().unwrap(), expected_items)
     }
 }
