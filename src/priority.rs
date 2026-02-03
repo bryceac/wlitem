@@ -1,4 +1,5 @@
-#[derive(Clone, Debug, PartialEq, Eq, PartialOrd)]
+use serde::{ Serialize, Deserialize };
+#[derive(Clone, Debug, Deserialize, Serialize,PartialEq, Eq, PartialOrd)]
 pub enum Priority {
     Low,
     Medium,

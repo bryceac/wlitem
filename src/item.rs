@@ -4,9 +4,11 @@ use crate::{Priority, ItemParsingError};
 
 use url::Url;
 
+use serde::{ Serialize, Deserialize };
+
 /// structure that represents an item in a wishlist
 
-#[derive(Clone, Debug, PartialEq, Eq, PartialOrd)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
 pub struct Item {
     pub id: String,
     pub name: String,
