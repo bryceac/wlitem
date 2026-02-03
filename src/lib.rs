@@ -66,4 +66,11 @@ mod tests {
 
         assert_eq!(sample_item.ok().unwrap(), expected_item);
     }
+
+    #[test]
+    fn item_priority_defaults_to_medium() {
+        let sample_item = Item::from_str("10\tNintendo Switch\t1\t\thttps://example.com");
+
+        assert_eq!(sample_item.ok().unwrap().priority, Priority::Medium)
+    }
 }
