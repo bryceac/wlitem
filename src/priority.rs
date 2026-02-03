@@ -3,7 +3,8 @@ use serde::{ Serialize, Deserialize };
 pub enum Priority {
     Low,
     Medium,
-    High
+    High,
+    Highest
 }
 
 impl Priority {
@@ -12,6 +13,7 @@ impl Priority {
             s if s.to_lowercase() == "low" => Some(Priority::Low),
             s if s.to_lowercase() == "medium" => Some(Priority::Medium),
             s if s.to_lowercase() == "high" => Some(Priority::High),
+            s if s.to_lowercase() == "highest" => Some(Priority::Highest),
             _ => None
         }
     }
@@ -20,7 +22,8 @@ impl Priority {
         match self {
             Priority::Low => "low",
             Priority::Medium => "medium",
-            Priority::High => "high"
+            Priority::High => "high",
+            Priority::Highest => "highest"
         }
     }
 
