@@ -10,9 +10,14 @@ use serde::{ Serialize, Deserialize };
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
 pub struct Item {
+
+    #[serde(default = "generate_id")]
     pub id: String,
     pub name: String,
+
+    #[serde(default = 1)]
     pub quantity: u32,
+    #[serde(default = "default_priority")]
     pub priority: Priority,
     pub url: Option<Url>,
     pub notes: Vec<String>
@@ -133,7 +138,7 @@ pub struct ItemBuilder {
 impl ItemBuilder {
     pub fn new() -> Self {
         ItemBuilder {
-            id: Uuid::new_v4().hyphenated().encode_upper(&mut Uuid::encode_buffer()).to_string(),
+            id: generate_id(),
             name: None,
             quantity: None,
             priority: None,
@@ -209,10 +214,18 @@ impl ItemBuilder {
             priority: if let Some(ref priority) = self.priority {
                 priority.clone()
             } else {
-                Priority::Medium
+                default_priority()
             },
             url : self.url.clone(),
             notes: self.notes.clone()
         }
     }
+}
+
+fn generate_id() -> String {
+    Uuid::new_v4().hyphenated().encode_upper(&mut Uuid::encode_buffer()).to_string()
+}
+
+fn default_priority() -> Priority {
+    Priority::Medium
 }
