@@ -75,4 +75,20 @@ mod tests {
 
         assert_eq!(sample_item.ok().unwrap().priority, Priority::Medium)
     }
+
+    #[test]
+    fn save_items_to_json() {
+
+        let sample_items = vec![
+            Item::from("", "Nintendo Switch 2", 1, "high", "https://example.com/nintendo_switch_2", vec![]),
+            Item::from("", "Mario Kart World", 1, "high", "https://example.com/nintendo_switch_2", vec![
+                "Only if I get the Switch 2".to_owned()
+            ]),
+            Item::from("", "Dragon Quest 7", 1, "", "https://example.com/nintendo_switch_2", vec![
+                "Only if I get the Switch 2".to_owned()
+            ])
+        ];
+
+        assert!(sample_items.save("wishlist.json").is_ok())
+    }
 }
