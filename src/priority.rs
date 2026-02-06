@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 use serde::{ Serialize, Deserialize };
 
 /// variants for priority levels
@@ -11,16 +13,6 @@ pub enum Priority {
 }
 
 impl Priority {
-    pub fn from_str(value: &str) -> Option<Self> {
-        match value {
-            s if s.to_lowercase() == "low" => Some(Priority::Low),
-            s if s.to_lowercase() == "medium" => Some(Priority::Medium),
-            s if s.to_lowercase() == "high" => Some(Priority::High),
-            s if s.to_lowercase() == "highest" => Some(Priority::Highest),
-            _ => None
-        }
-    }
-
     pub fn to_str(&self) -> &str {
         match self {
             Priority::Low => "low",
@@ -40,5 +32,17 @@ impl Priority {
 
     pub fn is_high(&self) -> bool {
         self.clone() == Priority::High
+    }
+}
+
+impl FromStr for Priority {
+    fn from_str(value: &str) -> Option<Self> {
+        match value {
+            s if s.to_lowercase() == "low" => Some(Priority::Low),
+            s if s.to_lowercase() == "medium" => Some(Priority::Medium),
+            s if s.to_lowercase() == "high" => Some(Priority::High),
+            s if s.to_lowercase() == "highest" => Some(Priority::Highest),
+            _ => None
+        }
     }
 }
