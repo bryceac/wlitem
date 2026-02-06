@@ -2,6 +2,8 @@ use std::str::FromStr;
 
 use serde::{ Serialize, Deserialize };
 
+use crate::priority_parse_error::PriorityParseError;
+
 /// variants for priority levels
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
 #[serde(rename_all = "lowercase")]
@@ -36,13 +38,15 @@ impl Priority {
 }
 
 impl FromStr for Priority {
-    fn from_str(value: &str) -> Option<Self> {
+    type Err = PriorityParseError;
+    
+    fn from_str(value: &str) -> Result<Self, PriorityParseError> {
         match value {
-            s if s.to_lowercase() == "low" => Some(Priority::Low),
-            s if s.to_lowercase() == "medium" => Some(Priority::Medium),
-            s if s.to_lowercase() == "high" => Some(Priority::High),
-            s if s.to_lowercase() == "highest" => Some(Priority::Highest),
-            _ => None
+            s if s.to_lowercase() == "low" => Ok(Priority::Low),
+            s if s.to_lowercase() == "medium" => Ok(Priority::Medium),
+            s if s.to_lowercase() == "high" => Ok(Priority::High),
+            s if s.to_lowercase() == "highest" => Ok(Priority::Highest),
+            _ => Err(PriorityParseError::InvalidPriority(value.to_owned()))
         }
     }
 }
