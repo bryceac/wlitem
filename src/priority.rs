@@ -2,6 +2,7 @@ use serde::{ Serialize, Deserialize };
 
 /// variants for priority levels
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
+#[serde(rename_all = "lowercase")]
 pub enum Priority {
     Low,
     Medium,
