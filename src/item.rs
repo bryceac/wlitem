@@ -206,7 +206,11 @@ impl ItemBuilder {
     }
 
     pub fn set_priority(&mut self, priority: &str) -> &mut Self {
-        self.priority = Priority::from_str(priority);
+        self.priority = if let Ok(priority) = Priority::from_str(priority) {
+            Some(priority)
+        } else {
+            None
+        };
         self
     }
 
