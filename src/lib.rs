@@ -15,14 +15,17 @@ pub fn add(left: u64, right: u64) -> u64 {
 
 #[cfg(test)]
 mod tests {
+    use crate::priority_parse_error::PriorityParseError;
+
     use super::*;
     use pretty_assertions::assert_eq;
+    use std::str::FromStr;
 
     #[test]
-    fn invalid_enum_is_none() {
+    fn invalid_value_gives_error() {
         let invalid_data = Priority::from_str("hello");
 
-        assert_eq!(invalid_data, None)
+        assert_eq!(invalid_data.err().unwrap(), PriorityParseError::InvalidPriority("hello".to_owned()))
     }
 
     #[test]
