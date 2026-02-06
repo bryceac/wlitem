@@ -6,7 +6,7 @@
 
 **Description:** a crate for Rust that provides a model that represents wishlist items.
 
-**Version:** 0.1.0
+**Version:** 0.1.1
 
 ## Notes
 
@@ -35,6 +35,8 @@ As of the writing of this README, each of those has been implemented.
 <dl>
   <dt style="font-weight:bold">0.1</dt>
   <dd>Initial release. Released Feb. 3, 2026</dd>
+  <dt style="font-weight:bold">0.1.1</dt>
+  <dd>Minor fixes to allow easier utilization with Clap. Released Feb. 5, 2026</dd>
 </dl>
 
 ### Usage
