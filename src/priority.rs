@@ -1,4 +1,6 @@
 use serde::{ Serialize, Deserialize };
+
+/// variants for priority levels
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
 pub enum Priority {
     Low,
