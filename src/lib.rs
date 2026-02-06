@@ -2,6 +2,7 @@ mod item;
 mod priority;
 mod item_parsing_error;
 mod save_vec;
+mod priority_parse_error;
 
 pub use priority::Priority as Priority;
 pub use item::Item as Item;
