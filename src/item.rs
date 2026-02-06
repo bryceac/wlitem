@@ -6,7 +6,7 @@ use url::Url;
 
 use serde::{ Serialize, Deserialize };
 
-use std::{ fs::{ File }, io::{ Read, self } };
+use std::{ fs::{ File }, io::{ Read, self }, str::FromStr };
 
 /// structure that represents an item in a wishlist
 
