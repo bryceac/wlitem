@@ -5,7 +5,7 @@ use serde::{ Serialize, Deserialize };
 use crate::priority_parse_error::PriorityParseError;
 
 /// variants for priority levels
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "lowercase")]
 pub enum Priority {
     Low,
