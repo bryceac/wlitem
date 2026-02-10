@@ -10,7 +10,7 @@ use std::{ fs::{ File }, io::{ Read, self }, str::FromStr };
 
 /// structure that represents an item in a wishlist
 
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Item {
 
     #[serde(default = "generate_id")]
