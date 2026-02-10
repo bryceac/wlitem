@@ -38,7 +38,7 @@ As of the writing of this README, each of those has been implemented.
   <dt style="font-weight:bold">0.1.1</dt>
   <dd>Minor fixes to allow easier utilization with Clap. Released Feb. 5, 2026</dd>
   <dt style="font-weight:bold">0.1.2</dt>
-  <dd>Minor fix that allows sorting by priority.</dd>
+  <dd>Minor fix that allows sorting by priority. Released Feb. 10, 2026</dd>
 </dl>
 
 ### Usage
