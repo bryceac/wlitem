@@ -17,7 +17,7 @@ pub struct Item {
     pub id: String,
     pub name: String,
 
-    #[serde(default = "default_quantity")]
+    #[serde(default = "default_quantity", skip_serializing_if = "quantity_is_default")]
     pub quantity: u32,
     #[serde(default ="default_priority", skip_serializing_if = "Priority::is_low")]
     pub priority: Priority,
@@ -271,6 +271,10 @@ fn default_priority() -> Priority {
 
 fn default_quantity() -> u32 {
     1
+}
+
+fn quantity_is_default(quantity: &u32) -> bool {
+    quantity == default_quantity()
 }
 
 fn file_contents_from(f: &str) -> Result<String, io::Error> {
