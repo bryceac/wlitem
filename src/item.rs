@@ -274,7 +274,7 @@ fn default_quantity() -> u32 {
 }
 
 fn quantity_is_default(quantity: &u32) -> bool {
-    quantity == default_quantity()
+    *quantity == default_quantity()
 }
 
 fn file_contents_from(f: &str) -> Result<String, io::Error> {
