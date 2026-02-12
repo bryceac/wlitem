@@ -19,8 +19,7 @@ pub struct Item {
 
     #[serde(default = "default_quantity")]
     pub quantity: u32,
-    #[serde(skip_serializing_if = "Priority::is_medium")]
-    #[serde(default = "default_priority")]
+    #[serde(default ="default_priority", skip_serializing_if = "Priority::is_low")]
     pub priority: Priority,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -267,7 +266,7 @@ fn generate_id() -> String {
 }
 
 fn default_priority() -> Priority {
-    Priority::Medium
+    Priority::Low
 }
 
 fn default_quantity() -> u32 {
