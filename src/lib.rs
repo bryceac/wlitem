@@ -18,7 +18,8 @@ mod tests {
     use crate::priority_parse_error::PriorityParseError;
 
     use super::*;
-    use pretty_assertions::assert_eq;
+    use http::Uri;
+use pretty_assertions::assert_eq;
     use std::str::FromStr;
 
     #[test]
@@ -36,13 +37,13 @@ mod tests {
     }
 
     #[test]
-    fn url_is_none_if_not_valid() {
+    fn url_is_default_if_not_valid() {
         let sample_item = Item::builder()
         .set_name("Sample Item")
-        .set_url("")
+        .set_url("?")
         .build();
 
-        assert_eq!(sample_item.url, None)
+        assert_eq!(sample_item.url, Uri::default())
     }
 
     #[test]

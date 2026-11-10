@@ -28,11 +28,7 @@ impl Save for Vec<Item> {
             item.name, 
             item.quantity, 
             item.priority.to_str(), 
-            if let Some(ref url) = item.url {
-                url.as_str()
-            } else {
-                ""
-            });
+            item.url);
 
             items.push_str(&item_string);
         }
