@@ -2,7 +2,7 @@ use uuid::Uuid;
 
 use crate::{Priority, ItemParsingError};
 
-use url::Url;
+use http::uri::Uri;
 
 use serde::{ Serialize, Deserialize };
 
@@ -10,7 +10,7 @@ use std::{ fs::{ File }, io::{ Read, self }, str::FromStr };
 
 /// structure that represents an item in a wishlist
 
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
 pub struct Item {
 
     #[serde(default = "generate_id")]
@@ -22,11 +22,23 @@ pub struct Item {
     #[serde(default ="default_priority", skip_serializing_if = "Priority::is_low")]
     pub priority: Priority,
 
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub url: Option<Url>,
+    #[serde(with= "http_serde_ext::uri", skip_serializing_if = "url_is_default")]
+    pub url: Uri,
 
     #[serde(default = "Vec::new", skip_serializing_if = "Vec::is_empty")]
     pub notes: Vec<String>
+}
+
+impl PartialOrd for Item {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.priority.cmp(&other.priority))
+    }
+}
+
+impl Ord for Item {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.priority.cmp(&other.priority)
+    } 
 }
 
 impl Item {
@@ -83,11 +95,7 @@ impl Item {
         self.name, 
         self.quantity, 
         self.priority.to_str(), 
-        if let Some(ref url) = self.url {
-            url.as_str()
-        } else {
-            ""
-        });
+        self.url.to_string());
 
         if !self.notes.is_empty() {
             content.push_str("-----\r\n");
@@ -165,7 +173,7 @@ pub struct ItemBuilder {
     pub name: Option<String>,
     pub quantity: Option<u32>,
     pub priority: Option<Priority>,
-    pub url: Option<Url>,
+    pub url: Option<Uri>,
     pub notes: Vec<String>
 }
 
@@ -217,10 +225,10 @@ impl ItemBuilder {
      * set the value to none.
      */
     pub fn set_url(&mut self, url: &str) -> &mut Self {
-        self.url = if let Ok(url) = Url::parse(url) {
-            Some(url)
+        self.url = if let Ok(parsed) = url.parse::<Uri>() {
+            Some(parsed)
         } else {
-            None
+            Some(Uri::default())
         };
 
         self
@@ -254,7 +262,7 @@ impl ItemBuilder {
             } else {
                 default_priority()
             },
-            url : self.url.clone(),
+            url : self.url.clone().unwrap_or(Uri::default()),
             notes: self.notes.clone()
         }
     }
@@ -274,6 +282,10 @@ fn default_quantity() -> u32 {
 
 fn quantity_is_default(quantity: &u32) -> bool {
     *quantity == default_quantity()
+}
+
+fn url_is_default(url: &Uri) -> bool {
+    *url == Uri::default()
 }
 
 fn file_contents_from(f: &str) -> Result<String, io::Error> {
