@@ -59,7 +59,7 @@ use pretty_assertions::assert_eq;
             \"name\": \"Sample Item\"
         }";
 
-        assert_eq!(expected_item, serde_json::from_str(text).unwrap(), expected_item)
+        assert_eq!(expected_item, serde_json::from_str(text).unwrap())
     }
 
     #[test]
