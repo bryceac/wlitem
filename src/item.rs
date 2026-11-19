@@ -22,7 +22,7 @@ pub struct Item {
     #[serde(default ="default_priority", skip_serializing_if = "Priority::is_low")]
     pub priority: Priority,
 
-    #[serde(default = "Uri::default" with= "http_serde_ext::uri", skip_serializing_if = "url_is_default")]
+    #[serde(default = "Uri::default", with= "http_serde_ext::uri", skip_serializing_if = "url_is_default")]
     pub url: Uri,
 
     #[serde(default = "Vec::new", skip_serializing_if = "Vec::is_empty")]
