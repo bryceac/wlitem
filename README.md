@@ -6,7 +6,7 @@
 
 **Description:** a crate for Rust that provides a model that represents wishlist items.
 
-**Version:** 0.1.4
+**Version:** 0.1.5
 
 ## Notes
 
@@ -43,6 +43,8 @@ As of the writing of this README, each of those has been implemented.
   <dd>Minor fix that makes JSON parsing flexible and change default priority level. Released Feb. 11, 2026</dd>
   <dt style="font-weight:bold">0.1.4</dt>
   <dd>Minor fix that makes URLs less strict. Released Nov. 10, 2026</dd>
+  <dt style="font-weight:bold">0.1.5</dt>
+  <dd>Minor fix that makes URLs optional in JSON. Released Nov. 19, 2026</dd>
 </dl>
 
 ### Usage
