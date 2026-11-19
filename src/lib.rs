@@ -21,7 +21,6 @@ mod tests {
     use http::Uri;
 use pretty_assertions::assert_eq;
     use std::str::FromStr;
-    use serde_json::from_str;
 
     #[test]
     fn invalid_value_gives_error() {
@@ -56,11 +55,11 @@ use pretty_assertions::assert_eq;
         .build();
 
         let text = "{
-            \"id\": "A",
-            \"name\": "Sample Item"
+            \"id\": \"A\",
+            \"name\": \"Sample Item\"
         }";
 
-        assert_eq!(expected_item, serde::from_str(text).unwrap(), expected_item)
+        assert_eq!(expected_item, serde_json::from_str(text).unwrap(), expected_item)
     }
 
     #[test]
