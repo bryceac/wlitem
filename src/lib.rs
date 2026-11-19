@@ -21,6 +21,7 @@ mod tests {
     use http::Uri;
 use pretty_assertions::assert_eq;
     use std::str::FromStr;
+    use serde_json::from_str;
 
     #[test]
     fn invalid_value_gives_error() {
@@ -44,6 +45,22 @@ use pretty_assertions::assert_eq;
         .build();
 
         assert_eq!(sample_item.url, Uri::default())
+    }
+
+    #[test]
+    fn url_is_default_if_missing_in_json() {
+        let expected_item = Item::builder()
+        .set_id("A")
+        .set_name("Sample Item")
+        .set_url("")
+        .build();
+
+        let text = "{
+            \"id\": "A",
+            \"name\": "Sample Item"
+        }";
+
+        assert_eq!(expected_item, serde::from_str(text).unwrap(), expected_item)
     }
 
     #[test]
